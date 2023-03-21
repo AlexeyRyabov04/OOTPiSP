@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     [Name("Keyboard")]
+    [Class]
     internal class Keyboard : PeripheralDevice
     {
         private bool hasCyrillicSupport;
         private bool hasNumpad;
 
-        public Keyboard(int _cost, int _guarantee, Vendor _vendor,
-            bool _hasCyrillicSupport, bool _hasNumpad, bool _isWireless,
-            ConnectionInterface _connectionInterface) : base(_cost, _guarantee, _vendor,
-            _connectionInterface, _isWireless)
+        public Keyboard() { }
+        public Keyboard(Keyboard keyboard): base(keyboard)
         {
-            hasCyrillicSupport = _hasCyrillicSupport;
-            hasNumpad = _hasNumpad;
+            hasCyrillicSupport = keyboard.HasCyrillicSupport;
+            hasNumpad = keyboard.HasNumpad;
         }
 
         [Name("Cyrillic Support")]

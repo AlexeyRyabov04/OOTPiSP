@@ -5,11 +5,14 @@ namespace Object_Editor
 {
     public partial class MainForm : Form
     {
+        public static Type[]? typesList;
+        internal static List<ComputerPart> computerParts = new List<ComputerPart>();
         public MainForm()
         {
             InitializeComponent();
+            typesList = Assembly.GetExecutingAssembly().GetTypes().
+                Where(type => type.IsDefined(typeof(ClassAttribute))).ToArray(); 
         }
-        internal static List<ComputerPart> computerParts = new List<ComputerPart>();
 
         private void displayComputerParts()
         {
@@ -22,14 +25,14 @@ namespace Object_Editor
                 NameAttribute? a = null;
                 if (type != null)
                     a = (NameAttribute)type;
-                if (a != null)
+                if (a != null && part.Vendor != null)
                     dataGridView.Rows.Add(i++, a.Name, part.Cost, part.Guarantee, part.Vendor.Name);
             }
         }
         private void addButton_Click(object sender, EventArgs e)
         {
             AddForm addForm = new AddForm();
-            AddForm.mode = 0;
+            AddForm.currMode = AddForm.mode.Add;
             addForm.ShowDialog();
             displayComputerParts();
         }
@@ -37,7 +40,7 @@ namespace Object_Editor
         private void viewButton_Click(object sender, EventArgs e)
         {
             AddForm addForm = new AddForm();
-            AddForm.mode = 1;
+            AddForm.currMode = AddForm.mode.View;
             AddForm.partIndex = dataGridView.CurrentRow.Index;
             addForm.ShowDialog();
         }
@@ -45,7 +48,7 @@ namespace Object_Editor
         private void editButton_Click(object sender, EventArgs e)
         {
             AddForm addForm = new AddForm();
-            AddForm.mode = 2;
+            AddForm.currMode = AddForm.mode.Edit;
             AddForm.partIndex = dataGridView.CurrentRow.Index;
             addForm.ShowDialog();
             displayComputerParts();
@@ -58,11 +61,15 @@ namespace Object_Editor
             deleteButton.Enabled = true;
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        public static void deleteComputerPart(int index)
         {
-            ComputerPart part = computerParts[dataGridView.CurrentRow.Index];
+            ComputerPart part = computerParts[index];
             part.Vendor = null ?? part.Vendor;
             part = null ?? part;
+        }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            deleteComputerPart(dataGridView.CurrentRow.Index);
             computerParts.RemoveAt(dataGridView.CurrentRow.Index);
             dataGridView.Rows.RemoveAt(dataGridView.CurrentRow.Index);
             if (dataGridView.Rows.Count == 0)

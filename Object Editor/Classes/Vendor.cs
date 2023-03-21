@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     internal class Vendor
     {
-        private string name;
+        private const int MaxYearOfFoundation = 2023;
+        private const int MinYearOfFoundation = 1900;
+        private const int MaxYearIncome = 10000;
+        private string? name;
         private int yearOfFoundation;
         private int yearIncome;
 
-        public Vendor(string _name, int _yearOfFoundation, int _yearIncome)
+        public Vendor() { }
+        public Vendor(Vendor vendor) 
         {
-            name = _name;
-            yearOfFoundation = _yearOfFoundation;   
-            yearIncome = _yearIncome;
+            name = vendor.Name;
+            yearOfFoundation = vendor.YearOfFoundation;
+            yearIncome = vendor.YearIncome;
         }
-
         [Name("Name")]
-        public string Name { get { return name; } set { name = value; } }
+        public string? Name { get { return name; } set { name = value; } }
         [Name("Year of foundation")]
         public int YearOfFoundation { get { return yearOfFoundation; } set { yearOfFoundation = value; } }
         [Name("Year income")]

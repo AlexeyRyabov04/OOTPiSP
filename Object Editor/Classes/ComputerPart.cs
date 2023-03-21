@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     internal abstract class ComputerPart
     {
         protected int cost;
         protected int guarantee;
-        protected Vendor vendor;
+        protected Vendor? vendor;
 
-        public ComputerPart(int _cost, int _guarantee, Vendor _vendor)
+        protected ComputerPart() { }
+        protected ComputerPart(ComputerPart part)
         {
-            cost = _cost;
-            guarantee = _guarantee;
-            vendor = _vendor;
+            cost = part.Cost;
+            guarantee = part.Guarantee;
+            if (part.Vendor != null)
+                vendor = new Vendor(part.Vendor);
         }
 
         [Name("Cost")]
@@ -24,6 +20,6 @@ namespace Object_Editor.Classes
         [Name("Guarantee")]
         public int Guarantee { get { return guarantee; } set { guarantee = value; } }
         [Name("Vendor")]
-        public Vendor Vendor { get { return vendor; } set { vendor = value; } }
+        public Vendor? Vendor { get { return vendor; } set { vendor = value; } }
     }
 }

@@ -1,26 +1,26 @@
 ﻿using Object_Editor.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Object_Editor.Factories
 {
     internal class MouseFactory : ComputerPartFactory
     {
-        public override ComputerPart createPart(List<Object> _fields)
+        private const int MaxSensitivity = 1000;
+        public override ComputerPart createPart()
         {
-            Vendor vendor = new Vendor(Convert.ToString(_fields[2]) ?? "name",
-                Convert.ToInt32(_fields[1]),
-                Convert.ToInt32(_fields[0]));
-            return new Mouse(Convert.ToInt32(_fields[4]),
-                Convert.ToInt32(_fields[3]),
-                vendor, Convert.ToInt32(_fields[8]), 
-                Convert.ToBoolean(_fields[7]),
-                Convert.ToBoolean(_fields[5]),
-                (PeripheralDevice.ConnectionInterface)Enum.Parse(typeof(PeripheralDevice.ConnectionInterface),
-                Convert.ToString(_fields[6]) ?? "null"));
+            return new Mouse();
+        }
+        public override bool checkFields(ComputerPart computerPart, Panel panel, string name)
+        {
+            bool isCorrect = base.checkBaseFields(computerPart, panel, name);
+            var mouse = computerPart as Mouse;
+            if (mouse != null)
+            {
+                if (mouse.Sensitivity <= 0 || mouse.Sensitivity > MaxSensitivity)
+                    isCorrect = setError(panel, name + ".SensitivityControl",
+                        "value must be from " + 1 + " to " + MaxSensitivity);
+            }
+            return isCorrect;
         }
     }
 }

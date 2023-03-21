@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     [Name("SSD")]
+    [Class]
     internal class SSD : Storage
     {
         public enum ConnectionInterface { 
@@ -23,17 +17,30 @@ namespace Object_Editor.Classes
             Realtek 
         };
         private Controller controller;
-        public SSD(int _cost, int _guarantee, Vendor _vendor, ConnectionInterface _connectionInterface, 
-            Controller _controller, int _storageCapacity, int _RWSpeed) :
-            base(_cost, _guarantee, _vendor, _storageCapacity, _RWSpeed)
+        public SSD() { }
+        public SSD(SSD ssd): base(ssd)
         {
-            connectionInterface = _connectionInterface;
-            controller = _controller;
+            connectionInterface = ssd._ConnectionInterface;
+            controller = ssd._Controller;
         }
 
         [Name("Connection Interface")]
-        public ConnectionInterface _ConnectionInterface { get { return connectionInterface; } set { connectionInterface = value; } }
+        public ConnectionInterface _ConnectionInterface
+        {
+            get { return connectionInterface; }
+            set
+            { 
+                connectionInterface = value;
+            } 
+        }
         [Name("Controller")]
-        public Controller _Controller { get { return controller; } set { controller = value; } }
+        public Controller _Controller 
+        { 
+            get { return controller; }
+            set
+            { 
+                controller = value; 
+            } 
+        }
     }
 }

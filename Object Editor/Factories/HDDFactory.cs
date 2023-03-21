@@ -1,27 +1,31 @@
 ﻿using Object_Editor.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Object_Editor.Factories
 {
-    internal class HDDFactory : ComputerPartFactory
+    internal class HDDFactory : StorageFactory
     {
-        public override ComputerPart createPart(List<Object> _fields)
+        private const int MaxSeekTime = 800;
+        private const int MinSeekTime = 200;
+        private const int MaxBufferCapacity = 4;
+        public override ComputerPart createPart()
         {
-            Vendor vendor = new Vendor(Convert.ToString(_fields[2]) ?? "name",
-                Convert.ToInt32(_fields[1]),
-                Convert.ToInt32(_fields[0]));
-            return new HDD(Convert.ToInt32(_fields[4]), 
-                Convert.ToInt32(_fields[3]), vendor, 
-                (HDD.ConnectionInterface)Enum.Parse(typeof(HDD.ConnectionInterface), 
-                Convert.ToString(_fields[9]) ?? "null"), 
-                Convert.ToInt32(_fields[8]), 
-                Convert.ToInt32(_fields[7]), 
-                Convert.ToInt32(_fields[6]),
-                Convert.ToInt32(_fields[5]));
+            return new HDD();
+        }
+        public override bool checkFields(ComputerPart computerPart, Panel panel, string name)
+        {
+            bool isCorrect = base.checkBaseFields(computerPart, panel, name);
+            var hdd = computerPart as HDD;
+            if (hdd != null)
+            {
+                if (hdd.SeekTime < MinSeekTime || hdd.SeekTime > MaxSeekTime)
+                    isCorrect = setError(panel, name + ".SeekTimeControl",
+                        "value must be from " + MinSeekTime + " to " + MaxSeekTime);
+                if (hdd.BufferCapacity <= 0 || hdd.BufferCapacity > MaxBufferCapacity)
+                    isCorrect = setError(panel, name + ".BufferCapacityControl",
+                        "value must be from " + 1 + " to " + MaxBufferCapacity);
+            }
+            return isCorrect;
         }
     }
 }

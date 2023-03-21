@@ -1,29 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     [Name("Headphones")]
+    [Class]
     internal class Headphones : PeripheralDevice
     {
         private int sensitivity;
         private int impedance;
 
-        public Headphones(int _cost, int _guarantee, Vendor _vendor,
-            int _sensitivity, int _impedance, bool _isWireless,
-            ConnectionInterface _connectionInterface) : base(_cost, _guarantee, _vendor,
-            _connectionInterface, _isWireless)
+        public Headphones() { }
+        public Headphones(Headphones headphones): base(headphones)
         {
-            sensitivity = _sensitivity;
-            impedance = _impedance;
+            sensitivity = headphones.Sensitivity;
+            impedance = headphones.Impedance;
         }
-
         [Name("Sensitivity")]
-        public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
+        public int Sensitivity 
+        { 
+            get { return sensitivity; } 
+            set 
+            {
+                    sensitivity = value;
+            } 
+        }
         [Name("Impedance")]
-        public int Impedance { get { return impedance; } set { impedance = value; } }
+        public int Impedance 
+        { 
+            get { return impedance; } 
+            set
+            {
+                    impedance = value;
+            } 
+        }
     }
 }

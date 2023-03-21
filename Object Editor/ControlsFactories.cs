@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Reflection;
 
 namespace Object_Editor
 {
@@ -23,6 +16,7 @@ namespace Object_Editor
             panel = _panel;
         }
         public abstract Control createControl();
+        public abstract void BindControl(Control control, object obj, string propertyName);
     }
     internal class LabelFactory : ControlFactory
     {
@@ -47,6 +41,7 @@ namespace Object_Editor
             panel.Controls.SetChildIndex(label, 0);
             return label;
         }
+        public override void BindControl(Control control, object obj, string propertyName){}
     }
 
     internal class ComboBoxFactory : ControlFactory
@@ -69,8 +64,16 @@ namespace Object_Editor
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.TabIndex = 0;
             comboBox.SelectedIndex = 0;
+            comboBox.CausesValidation = false;
             panel.Controls.SetChildIndex(comboBox, 0);
             return comboBox;
+        }
+        public override void BindControl(Control control, object obj, string propertyName)
+        {
+            control.Name = obj + "." + propertyName + "Control";
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = obj;
+            control.DataBindings.Add("Text", bindingSource, propertyName, true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
     internal class TextBoxFactory : ControlFactory
@@ -92,6 +95,13 @@ namespace Object_Editor
             panel.Controls.SetChildIndex(textBox, 0);
             return textBox;
         }
+        public override void BindControl(Control control, object obj, string propertyName)
+        {
+            control.Name = obj + "." + propertyName + "Control";
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = obj;
+            control.DataBindings.Add("Text", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
+        }
     }
 
     internal class CheckBoxFactory : ControlFactory
@@ -107,6 +117,13 @@ namespace Object_Editor
             checkBox.Location = point;
             panel.Controls.SetChildIndex(checkBox, 0);
             return checkBox;
+        }
+        public override void BindControl(Control control, object obj, string propertyName)
+        {
+            control.Name = obj + "." + propertyName + "Control";
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = obj;
+            control.DataBindings.Add("Checked", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
         }
     }
 
@@ -130,6 +147,13 @@ namespace Object_Editor
             numericUpDown.Value = 0;
             panel.Controls.SetChildIndex(numericUpDown, 0);
             return numericUpDown;
+        }
+        public override void BindControl(Control control, object obj, string propertyName)
+        {
+            control.Name = obj + "." + propertyName + "Control";
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = obj;
+            control.DataBindings.Add("Value", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
         }
     }
 

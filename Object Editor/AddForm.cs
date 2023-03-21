@@ -1,18 +1,32 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq.Expressions;
+using System.Numerics;
 using System.Reflection;
+using System.Windows.Forms;
 using Object_Editor.Classes;
+using Object_Editor.Factories;
 
 namespace Object_Editor
 {
     public partial class AddForm : Form
     {
+        ComputerPart? part;
+        ComputerPart? copy;
         private const int PADDING = 50;
         private const int MAX_VALUE = 10000;
-        public static int mode;
+        private bool isAdd = false;
+        public enum mode { Add, Edit, View };
+        public static mode currMode;
         public static int partIndex;
         public AddForm()
         {
             InitializeComponent();
+            typeComboBox.Enabled = true;
+            if (MainForm.typesList != null)
+                typeComboBox.Items.AddRange(MainForm.typesList.Select(i => i.Name).ToArray());
         }
 
         Dictionary<Type, Type> dictionary = new Dictionary<Type, Type>()
@@ -34,34 +48,7 @@ namespace Object_Editor
             factory.createControl();
         }
 
-        private void createPart(Type type)
-        {
-            Object? obj = Activator.CreateInstance(dictionary[type]);
-            Factories.ComputerPartFactory factory;
-            if (obj != null)
-            {
-                factory = (Factories.ComputerPartFactory)obj;
-                List<Object> list = new List<Object>();
-                int count = controlsPanel.Controls.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    if (controlsPanel.Controls[i] is CheckBox)
-                    {
-                        CheckBox control = (CheckBox)controlsPanel.Controls[i];
-                        list.Add(control.Checked.ToString());
-                    }
-                    else
-                        list.Add(controlsPanel.Controls[i].Text);
-                }
-                ComputerPart part = factory.createPart(list);
-                if (mode == 0)
-                    MainForm.computerParts.Add(part);
-                else
-                    MainForm.computerParts[partIndex] = part;
-            }
-
-        }
-        private void createControl(Type type, int location)
+        private void createControl(Object obj, Type type, string propertyName, int location)
         {
             ControlFactory? factory = null;
             if (type == typeof(Int32))
@@ -81,7 +68,8 @@ namespace Object_Editor
             }
             else if (type == typeof(Vendor))
             {
-                createFields(type, location + PADDING);
+                if (part != null && part.Vendor != null)
+                    createFields(part.Vendor, type, location + PADDING);
             }
             else if (type.IsEnum)
             {
@@ -90,10 +78,13 @@ namespace Object_Editor
                     new Size(218, 30), controlsPanel, fields.Skip(1).Select(i => i.Name).ToArray());
             }
             if (factory != null)
-                factory.createControl();
+            {
+                Control control = factory.createControl();
+                factory.BindControl(control, obj, propertyName);
+            }
         }
 
-        private void createFields(Type type, int location)
+        private void createFields(Object obj, Type type, int location)
         {
             var fields = type.GetProperties();
             foreach (PropertyInfo field in fields)
@@ -101,7 +92,7 @@ namespace Object_Editor
                 Attribute? name = field.GetCustomAttribute(typeof(NameAttribute));
                 if (name != null)
                     createLabel(location, ((NameAttribute)name).Name);
-                createControl(field.PropertyType, location);
+                createControl(obj, field.PropertyType, field.Name, location);
                 location += PADDING;
             }
         }
@@ -137,10 +128,10 @@ namespace Object_Editor
         }
         private void fillControls(bool enabled)
         {
-            ComputerPart part = MainForm.computerParts[partIndex];
-            string partName = part.GetType().ToString();
-            partName = partName.Substring(partName.LastIndexOf(".") + 1);
-            typeComboBox.SelectedIndex = typeComboBox.Items.IndexOf(partName);
+            part = MainForm.computerParts[partIndex];
+            if (MainForm.typesList != null)
+                typeComboBox.SelectedIndex = typeComboBox.Items.IndexOf(
+                    MainForm.typesList[Array.IndexOf(MainForm.typesList, part.GetType())].Name);
             int i = controlsPanel.Controls.Count - 1;
             fillFields(part, enabled, ref i);
         }
@@ -155,14 +146,43 @@ namespace Object_Editor
                 tmp.Dispose();
             }
         }
-        private void typeComboBox_SelectedValueChanged(object sender, EventArgs e)
+
+        private ComputerPart? createPart(Type type)
+        {
+            Object? obj = Activator.CreateInstance(dictionary[type]);
+            ComputerPartFactory factory;
+            if (obj != null)
+            {
+                factory = (ComputerPartFactory)obj;
+                ComputerPart part = factory.createPart();
+                Vendor vendor = new Vendor();
+                part.Vendor = vendor;
+                return part;
+            }
+            return null;
+        }
+        private void selectedChanged()
         {
             deleteControls(labelPanel);
             deleteControls(controlsPanel);
             int location = 0;
-            Type? type = Type.GetType("Object_Editor.Classes." + typeComboBox.SelectedItem.ToString());
-            if (type != null)
-                createFields(type, location);
+            if (MainForm.typesList != null)
+            {
+                Type? type = Type.GetType(MainForm.typesList[typeComboBox.SelectedIndex].ToString());
+                if (type != null)
+                {
+                    if (currMode == mode.Add)
+                        part = createPart(type);
+                    if (part != null)
+                        createFields(part, type, location);
+                }
+            }
+        }
+        private void typeComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            panel2.AutoSize = false;
+            selectedChanged();
+            panel2.AutoSize = true;
             CenterToScreen();
         }
 
@@ -175,22 +195,29 @@ namespace Object_Editor
                     labelPanel.Controls.Remove(labelPanel.Controls[i--]);
             }
         }
-        private bool checkFields()
+        private void clearErrors()
         {
-            deleteErrorLabels();
-            bool isCorrect = true;
             foreach (Control control in controlsPanel.Controls)
             {
-                if ((control as NumericUpDown)?.Value > MAX_VALUE ||
-                    (control as NumericUpDown)?.Value <= 0 ||
-                    (control as TextBox)?.Text.Length == 0 ||
-                    (control as TextBox)?.Text.Length > 15)
+                ErrorProvider? error = null;
+                if (control.Tag != null)
+                    error = control.Tag as ErrorProvider;
+                if (error != null)
+                    error.Clear();
+            }
+        }
+        private bool checkFields()
+        {
+            bool isCorrect = true;
+            clearErrors();
+            if (part != null)
+            {
+                Object? obj = Activator.CreateInstance(dictionary[part.GetType()]);
+                ComputerPartFactory factory;
+                if (obj != null)
                 {
-                    Label label = new Label();
-                    ControlFactory factory = new LabelFactory(new Font("Times New Roman", 10F, FontStyle.Regular),
-                        new Point(0, control.Location.Y + 20), new Size(218, 15), labelPanel, Color.Red, "Error data");
-                    factory.createControl();
-                    isCorrect = false;
+                    factory = (ComputerPartFactory)obj;
+                    isCorrect = factory.checkFields(part, controlsPanel, part.GetType().ToString());
                 }
             }
             return isCorrect;
@@ -200,26 +227,33 @@ namespace Object_Editor
         {
             if (checkFields())
             {
-                if (mode != 1)
-                {
-                    Type? type = Type.GetType("Object_Editor.Classes." + typeComboBox.SelectedItem.ToString());
-                    if (type != null && checkFields())
-                        createPart(type);
-                }
+                if (part != null)
+                    if (currMode == mode.Add)
+                        MainForm.computerParts.Add(part);
+                    else
+                    {
+                        MainForm.deleteComputerPart(partIndex);
+                        MainForm.computerParts[partIndex] = part;
+                    }
+                isAdd = true;
                 Close();
             }
         }
 
+        private void createCopy()
+        {
+            if (MainForm.typesList != null)
+                copy = Activator.CreateInstance(MainForm.typesList[typeComboBox.SelectedIndex], part) as ComputerPart;
+        }
         private void AddForm_Load(object sender, EventArgs e)
         {
-            typeComboBox.Enabled = true;
-            if (mode == 0)
+            if (currMode == mode.Add)
             {
                 this.Text = "Add Form";
                 button.Text = "Add computer part";
                 mainLabel.Text = "Add Computer Part";
             }
-            else if (mode == 1)
+            else if (currMode == mode.View)
             {
                 this.Text = "View Form";
                 button.Text = "Close";
@@ -227,13 +261,22 @@ namespace Object_Editor
                 typeComboBox.Enabled = false;
                 fillControls(false);
             }
-            else if (mode == 2)
+            else if (currMode == mode.Edit)
             {
                 this.Text = "Edit Form";
                 button.Text = "Edit computer part fields";
                 mainLabel.Text = "Edit Computer Part";
+                typeComboBox.Enabled = false;
                 fillControls(true);
+                createCopy();
             }
+            
+        }
+
+        private void AddForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isAdd)
+                part = copy;
         }
     }
 }

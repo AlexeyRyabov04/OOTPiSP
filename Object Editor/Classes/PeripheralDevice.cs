@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     internal abstract class PeripheralDevice : ComputerPart
     {
@@ -16,11 +10,12 @@ namespace Object_Editor.Classes
         };
         protected ConnectionInterface connectionInterface;
         protected bool isWireless;
-        public PeripheralDevice(int _cost, int _guarantee, Vendor _vendor, ConnectionInterface _connectionInterface, bool _isWireless) 
-            : base(_cost, _guarantee, _vendor)
+
+        public PeripheralDevice() { }
+        protected PeripheralDevice(PeripheralDevice peripheralDevice): base(peripheralDevice)
         {
-            connectionInterface = _connectionInterface;
-            isWireless = _isWireless;
+            connectionInterface = peripheralDevice._ConnectionInterface;
+            isWireless = peripheralDevice.IsWireless;
         }
 
         [Name("Connection Interface")]

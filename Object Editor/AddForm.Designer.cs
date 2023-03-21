@@ -45,7 +45,6 @@
             typeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             typeComboBox.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             typeComboBox.FormattingEnabled = true;
-            typeComboBox.Items.AddRange(new object[] { "CPU", "MotherBoard", "VideoCard", "SSD", "HDD", "Headphones", "Keyboard", "Mouse" });
             typeComboBox.Location = new Point(245, 57);
             typeComboBox.Name = "typeComboBox";
             typeComboBox.Size = new Size(218, 29);
@@ -78,7 +77,7 @@
             button.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button.Location = new Point(0, 76);
             button.Name = "button";
-            button.Size = new Size(467, 41);
+            button.Size = new Size(475, 41);
             button.TabIndex = 6;
             button.Text = "Add Computer Part";
             button.UseVisualStyleBackColor = true;
@@ -107,18 +106,17 @@
             panel1.Controls.Add(button);
             panel1.Location = new Point(5, 110);
             panel1.Name = "panel1";
-            panel1.Size = new Size(467, 117);
+            panel1.Size = new Size(475, 117);
             panel1.TabIndex = 7;
             // 
             // panel2
             // 
-            panel2.AutoSize = true;
             panel2.Controls.Add(controlsPanel);
             panel2.Controls.Add(labelPanel);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(467, 60);
+            panel2.Size = new Size(475, 60);
             panel2.TabIndex = 8;
             // 
             // AddForm
@@ -127,7 +125,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(484, 248);
+            ClientSize = new Size(489, 248);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(typeComboBox);
@@ -137,9 +135,9 @@
             Name = "AddForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AddForm";
+            FormClosing += AddForm_FormClosing;
             Load += AddForm_Load;
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);

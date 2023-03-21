@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     [Name("Mouse")]
+    [Class]
     internal class Mouse : PeripheralDevice
     {
         private int sensitivity;
         private bool isNoiseless;
 
-        public Mouse(int _cost, int _guarantee, Vendor _vendor,
-            int _sensitivity, bool _isNoiseless, bool _isWireless, 
-            ConnectionInterface _connectionInterface) : base(_cost, _guarantee, _vendor,
-            _connectionInterface, _isWireless)
+        public Mouse() { }
+        public Mouse(Mouse mouse): base(mouse)
         {
-            sensitivity = _sensitivity;
-            isNoiseless = _isNoiseless;
+            sensitivity = mouse.Sensitivity;
+            isNoiseless = mouse.IsNoiseless;
         }
-
         [Name("Sensitivity")]
-        public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
+        public int Sensitivity 
+        { 
+            get { return sensitivity; }
+            set 
+            {
+                    sensitivity = value; 
+            } 
+        }
         [Name("Noiseless")]
         public bool IsNoiseless { get { return isNoiseless; } set { isNoiseless = value; } }
     }

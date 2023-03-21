@@ -1,27 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Object_Editor.Classes
+﻿namespace Object_Editor.Classes
 {
     [Name("CPU")]
+    [Class]
     internal class CPU : ComputerPart
     {
         private int numberOfCores;
         private int frequency;
 
-        public CPU(int _cost, int _guarantee, Vendor _vendor, int _numberOfCores, int _frequency)
-            : base(_cost, _guarantee, _vendor)
+        public CPU() { }
+        public CPU(ComputerPart part): base(part)
         {
-            numberOfCores = _numberOfCores;
-            frequency = _frequency;
+            var cpu = part as CPU;
+            if (cpu != null)
+            {
+                numberOfCores = cpu.NumberOfCores;
+                frequency = cpu.Frequency;
+            }
         }
-
         [Name("Cores")]
-        public int NumberOfCores { get { return numberOfCores; } set { numberOfCores = value; } }
+        public int NumberOfCores { get { return numberOfCores; } set { numberOfCores = value;} }
         [Name("Frequency")]
-        public int Frequency { get { return frequency; } set { frequency = value; } }
+        public int Frequency 
+        {
+            get { return frequency; } 
+            set
+            {
+                frequency = value;
+            }
+        }
     }
 }
