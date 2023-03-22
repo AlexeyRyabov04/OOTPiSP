@@ -2,9 +2,6 @@
 {
     internal class Vendor
     {
-        private const int MaxYearOfFoundation = 2023;
-        private const int MinYearOfFoundation = 1900;
-        private const int MaxYearIncome = 10000;
         private string? name;
         private int yearOfFoundation;
         private int yearIncome;

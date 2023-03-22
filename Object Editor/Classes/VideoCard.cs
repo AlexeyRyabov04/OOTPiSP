@@ -18,40 +18,12 @@
             fillrate = videoCard.Fillrate;
         }
         [Name("Memory slots")]
-        public int NumberOfMemorySlots 
-        { 
-            get { return numberOfMemorySlots; } 
-            set 
-            { 
-                numberOfMemorySlots = value;
-            } 
-        }
+        public int NumberOfMemorySlots { get { return numberOfMemorySlots; } set { numberOfMemorySlots = value; } }
         [Name("Memory frequency")]
-        public int MemoryFrequency 
-        {
-            get { return memoryFrequency; }
-            set 
-            {
-                memoryFrequency = value; 
-            } 
-        }
+        public int MemoryFrequency { get { return memoryFrequency; }set { memoryFrequency = value; } }
         [Name("Bus width")]
-        public int BusWidth 
-        {
-            get { return busWidth; }
-            set 
-            {
-                busWidth = value;
-            } 
-        }
+        public int BusWidth { get { return busWidth; } set { busWidth = value;} }
         [Name("Fillrate")]
-        public int Fillrate
-        { 
-            get { return fillrate; }
-            set 
-            { 
-                fillrate = value;
-            } 
-        }
+        public int Fillrate { get { return fillrate; } set { fillrate = value; } }
     }
 }

@@ -100,7 +100,7 @@ namespace Object_Editor
             control.Name = obj + "." + propertyName + "Control";
             BindingSource bindingSource = new BindingSource();
             bindingSource.DataSource = obj;
-            control.DataBindings.Add("Text", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
+            control.DataBindings.Add("Text", bindingSource, propertyName, true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 
@@ -123,7 +123,7 @@ namespace Object_Editor
             control.Name = obj + "." + propertyName + "Control";
             BindingSource bindingSource = new BindingSource();
             bindingSource.DataSource = obj;
-            control.DataBindings.Add("Checked", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
+            control.DataBindings.Add("Checked", bindingSource, propertyName, true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 
@@ -153,7 +153,7 @@ namespace Object_Editor
             control.Name = obj + "." + propertyName + "Control";
             BindingSource bindingSource = new BindingSource();
             bindingSource.DataSource = obj;
-            control.DataBindings.Add("Value", bindingSource, propertyName, true, DataSourceUpdateMode.OnValidation);
+            control.DataBindings.Add("Value", bindingSource, propertyName, true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 

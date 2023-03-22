@@ -1,11 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq.Expressions;
-using System.Numerics;
+﻿using System.Data;
 using System.Reflection;
-using System.Windows.Forms;
 using Object_Editor.Classes;
 using Object_Editor.Factories;
 
@@ -31,14 +25,14 @@ namespace Object_Editor
 
         Dictionary<Type, Type> dictionary = new Dictionary<Type, Type>()
         {
-            { typeof(CPU), typeof(Factories.CPUFactory) },
-            { typeof(HDD), typeof(Factories.HDDFactory) },
-            { typeof(Headphones), typeof(Factories.HeadphonesFactory) },
-            { typeof(Keyboard), typeof(Factories.KeyboardFactory) },
-            { typeof(MotherBoard), typeof(Factories.MotherBoardFactory) },
-            { typeof(Mouse), typeof(Factories.MouseFactory) },
-            { typeof(SSD), typeof(Factories.SSDFactory) },
-            { typeof(VideoCard), typeof(Factories.VideoCardFactory) },
+            { typeof(CPU), typeof(CPUFactory) },
+            { typeof(HDD), typeof(HDDFactory) },
+            { typeof(Headphones), typeof(HeadphonesFactory) },
+            { typeof(Keyboard), typeof(KeyboardFactory) },
+            { typeof(MotherBoard), typeof(MotherBoardFactory) },
+            { typeof(Mouse), typeof(MouseFactory) },
+            { typeof(SSD), typeof(SSDFactory) },
+            { typeof(VideoCard), typeof(VideoCardFactory) },
         };
 
         private void createLabel(int location, string name)
@@ -73,9 +67,8 @@ namespace Object_Editor
             }
             else if (type.IsEnum)
             {
-                FieldInfo[] fields = type.GetFields();
                 factory = new ComboBoxFactory(new Font("Times New Roman", 14.25F, FontStyle.Regular), new Point(0, location),
-                    new Size(218, 30), controlsPanel, fields.Skip(1).Select(i => i.Name).ToArray());
+                    new Size(218, 30), controlsPanel, Enum.GetNames(type));
             }
             if (factory != null)
             {
@@ -185,16 +178,6 @@ namespace Object_Editor
             panel2.AutoSize = true;
             CenterToScreen();
         }
-
-        private void deleteErrorLabels()
-        {
-            int count = labelPanel.Controls.Count;
-            for (int i = 0; i < labelPanel.Controls.Count; i++)
-            {
-                if (labelPanel.Controls[i].ForeColor == Color.Red)
-                    labelPanel.Controls.Remove(labelPanel.Controls[i--]);
-            }
-        }
         private void clearErrors()
         {
             foreach (Control control in controlsPanel.Controls)
@@ -225,7 +208,7 @@ namespace Object_Editor
 
         private void button_Click(object sender, EventArgs e)
         {
-            if (checkFields())
+            if (checkFields() && typeComboBox.SelectedIndex != -1)
             {
                 if (part != null)
                     if (currMode == mode.Add)
@@ -270,7 +253,6 @@ namespace Object_Editor
                 fillControls(true);
                 createCopy();
             }
-            
         }
 
         private void AddForm_FormClosing(object sender, FormClosingEventArgs e)

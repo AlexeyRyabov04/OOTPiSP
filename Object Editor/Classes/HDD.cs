@@ -25,31 +25,10 @@
         }
 
         [Name("Connection Interface")]
-        public ConnectionInterface _ConnectionInterface 
-        {
-            get { return connectionInterface; } 
-            set 
-            {
-                connectionInterface = value;
-            } 
-        }
+        public ConnectionInterface _ConnectionInterface { get { return connectionInterface; } set { connectionInterface = value; } }
         [Name("Seek time")]
-        public int SeekTime
-        { 
-            get { return seekTime; }
-            set
-            {
-                    seekTime = value;
-            } 
-        }
+        public int SeekTime { get { return seekTime; } set { seekTime = value; } }
         [Name("Buffer capacity")]
-        public int BufferCapacity 
-        { 
-            get { return bufferCapacity; } 
-            set 
-            {
-                    bufferCapacity = value; 
-            }
-        }
+        public int BufferCapacity { get { return bufferCapacity; } set { bufferCapacity = value; } }
     }
 }

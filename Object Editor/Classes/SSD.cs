@@ -25,22 +25,8 @@
         }
 
         [Name("Connection Interface")]
-        public ConnectionInterface _ConnectionInterface
-        {
-            get { return connectionInterface; }
-            set
-            { 
-                connectionInterface = value;
-            } 
-        }
+        public ConnectionInterface _ConnectionInterface{ get { return connectionInterface; } set { connectionInterface = value; } }
         [Name("Controller")]
-        public Controller _Controller 
-        { 
-            get { return controller; }
-            set
-            { 
-                controller = value; 
-            } 
-        }
+        public Controller _Controller { get { return controller; } set { controller = value; } }
     }
 }

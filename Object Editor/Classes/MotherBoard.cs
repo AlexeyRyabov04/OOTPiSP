@@ -28,32 +28,10 @@
             format = motherBoard._Format;
         }
         [Name("Memory Slots")]
-        public int NumberOfMemorySlots 
-        {
-            get { return numberOfMemorySlots; }
-            set 
-            {
-                    numberOfMemorySlots = value;
-            } 
-        }
+        public int NumberOfMemorySlots { get { return numberOfMemorySlots; } set { numberOfMemorySlots = value;} }
         [Name("Socket")]
-        public Socket _Socket 
-        { 
-            get { return socket; }
-            set
-            {
-                socket = value; 
-            }
-        }
+        public Socket _Socket { get { return socket; } set { socket = value; }}
         [Name("Format")]
-        public Format _Format 
-        {
-            get { return format; }
-            set
-            { 
-                format = value;
-            } 
-        }
-
+        public Format _Format { get { return format; } set { format = value; } }
     }
 }

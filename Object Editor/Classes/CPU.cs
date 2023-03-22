@@ -20,13 +20,6 @@
         [Name("Cores")]
         public int NumberOfCores { get { return numberOfCores; } set { numberOfCores = value;} }
         [Name("Frequency")]
-        public int Frequency 
-        {
-            get { return frequency; } 
-            set
-            {
-                frequency = value;
-            }
-        }
+        public int Frequency { get { return frequency; } set { frequency = value; } }
     }
 }

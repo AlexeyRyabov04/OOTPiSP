@@ -14,14 +14,7 @@
             isNoiseless = mouse.IsNoiseless;
         }
         [Name("Sensitivity")]
-        public int Sensitivity 
-        { 
-            get { return sensitivity; }
-            set 
-            {
-                    sensitivity = value; 
-            } 
-        }
+        public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
         [Name("Noiseless")]
         public bool IsNoiseless { get { return isNoiseless; } set { isNoiseless = value; } }
     }

@@ -14,22 +14,8 @@
             impedance = headphones.Impedance;
         }
         [Name("Sensitivity")]
-        public int Sensitivity 
-        { 
-            get { return sensitivity; } 
-            set 
-            {
-                    sensitivity = value;
-            } 
-        }
+        public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
         [Name("Impedance")]
-        public int Impedance 
-        { 
-            get { return impedance; } 
-            set
-            {
-                    impedance = value;
-            } 
-        }
+        public int Impedance { get { return impedance; } set{ impedance = value; } }
     }
 }

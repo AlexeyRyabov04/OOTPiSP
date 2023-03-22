@@ -15,6 +15,7 @@ namespace Object_Editor.Factories
             ErrorProvider error = new ErrorProvider();
             var control = panel.Controls.Find(name, false).FirstOrDefault();
             error.SetError(control, message);
+            error.BlinkRate = 0;
             if (control != null)
                 control.Tag = error;
             return false;

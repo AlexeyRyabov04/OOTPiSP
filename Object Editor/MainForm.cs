@@ -72,6 +72,7 @@ namespace Object_Editor
             deleteComputerPart(dataGridView.CurrentRow.Index);
             computerParts.RemoveAt(dataGridView.CurrentRow.Index);
             dataGridView.Rows.RemoveAt(dataGridView.CurrentRow.Index);
+            displayComputerParts();
             if (dataGridView.Rows.Count == 0)
             {
                 viewButton.Enabled = false;

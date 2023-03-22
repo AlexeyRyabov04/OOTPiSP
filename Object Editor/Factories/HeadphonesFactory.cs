@@ -21,7 +21,7 @@ namespace Object_Editor.Factories
             {
                 if (headphones.Sensitivity < MinSensitivity || headphones.Sensitivity > MaxSensitivity)
                     isCorrect = setError(panel, name + ".SensitivityControl",
-                        "value must be from " + MinImpedance + " to " + MaxImpedance);
+                        "value must be from " + MinSensitivity + " to " + MaxSensitivity);
                 if (headphones.Impedance < MinImpedance || headphones.Impedance > MaxImpedance)
                     isCorrect = setError(panel, name + ".ImpedanceControl",
                         "value must be from " + MinImpedance + " to " + MaxImpedance);
