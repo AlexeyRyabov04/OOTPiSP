@@ -1,6 +1,6 @@
 ﻿namespace Object_Editor.Classes
 {
-    internal abstract class ComputerPart
+    public abstract class ComputerPart
     {
         protected int cost;
         protected int guarantee;
@@ -13,6 +13,13 @@
             guarantee = part.Guarantee;
             if (part.Vendor != null)
                 vendor = new Vendor(part.Vendor);
+        }
+        
+        protected ComputerPart(int _cost, int _guarantee, Vendor _vendor)
+        {
+            cost = _cost;
+            guarantee = _guarantee;
+            vendor = _vendor;
         }
 
         [Name("Cost")]

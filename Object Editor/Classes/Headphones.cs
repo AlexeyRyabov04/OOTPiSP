@@ -2,7 +2,7 @@
 {
     [Name("Headphones")]
     [Class]
-    internal class Headphones : PeripheralDevice
+    public class Headphones : PeripheralDevice
     {
         private int sensitivity;
         private int impedance;
@@ -13,6 +13,14 @@
             sensitivity = headphones.Sensitivity;
             impedance = headphones.Impedance;
         }
+        public Headphones(int _cost, int _guarantee, Vendor _vendor,
+            ConnectionInterface _connectionInterface, bool _isWireless, int _sensitivity, int _impedance)
+            : base(_cost, _guarantee, _vendor, _connectionInterface, _isWireless)
+        {
+            sensitivity = _sensitivity;
+            impedance = _impedance;
+        }
+
         [Name("Sensitivity")]
         public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
         [Name("Impedance")]

@@ -1,6 +1,6 @@
 ﻿namespace Object_Editor.Classes
 {
-    internal abstract class PeripheralDevice : ComputerPart
+    public abstract class PeripheralDevice : ComputerPart
     {
         public enum ConnectionInterface { 
             USB, 
@@ -16,6 +16,13 @@
         {
             connectionInterface = peripheralDevice._ConnectionInterface;
             isWireless = peripheralDevice.IsWireless;
+        }
+        public PeripheralDevice(int _cost, int _guarantee, Vendor _vendor, 
+            ConnectionInterface _connectionInterface, bool _isWireless)
+            : base(_cost, _guarantee, _vendor)
+        {
+            connectionInterface = _connectionInterface;
+            isWireless = _isWireless;
         }
 
         [Name("Connection Interface")]

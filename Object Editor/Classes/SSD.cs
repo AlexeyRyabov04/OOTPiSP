@@ -1,16 +1,18 @@
-﻿namespace Object_Editor.Classes
+﻿using static Object_Editor.Classes.HDD;
+
+namespace Object_Editor.Classes
 {
     [Name("SSD")]
     [Class]
-    internal class SSD : Storage
+    public class SSD : Storage
     {
-        public enum ConnectionInterface { 
+        public enum SSDInterface { 
             SATA, 
             mSATA, 
             M2, 
             PCIExpress 
         };
-        private ConnectionInterface connectionInterface;
+        private SSDInterface connectionInterface;
         public enum Controller {
             Marvell, 
             Phison, 
@@ -23,9 +25,15 @@
             connectionInterface = ssd._ConnectionInterface;
             controller = ssd._Controller;
         }
-
+        public SSD(int _cost, int _guarantee, Vendor _vendor, int _storageCapacity, int _RWSpeed,
+            SSDInterface _connectionInterface, Controller _controller)
+            : base(_cost, _guarantee, _vendor, _storageCapacity, _RWSpeed)
+        {
+            connectionInterface = _connectionInterface;
+            controller = _controller;
+        }
         [Name("Connection Interface")]
-        public ConnectionInterface _ConnectionInterface{ get { return connectionInterface; } set { connectionInterface = value; } }
+        public SSDInterface _ConnectionInterface{ get { return connectionInterface; } set { connectionInterface = value; } }
         [Name("Controller")]
         public Controller _Controller { get { return controller; } set { controller = value; } }
     }
