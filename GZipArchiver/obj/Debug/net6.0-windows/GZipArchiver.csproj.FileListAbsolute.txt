@@ -1,0 +1,18 @@
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\Object Editor.deps.json
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\Object Editor.runtimeconfig.json
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\Object Editor.exe
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\GZipArchiver.deps.json
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\GZipArchiver.dll
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\GZipArchiver.pdb
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\Object Editor.dll
+D:\OOTPiSP\GZipArchiver\bin\Debug\net6.0-windows\Object Editor.pdb
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.csproj.AssemblyReference.cache
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.GeneratedMSBuildEditorConfig.editorconfig
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.AssemblyInfoInputs.cache
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.AssemblyInfo.cs
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.csproj.CoreCompileInputs.cache
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.csproj.CopyComplete
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.dll
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\refint\GZipArchiver.dll
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\GZipArchiver.pdb
+D:\OOTPiSP\GZipArchiver\obj\Debug\net6.0-windows\ref\GZipArchiver.dll
