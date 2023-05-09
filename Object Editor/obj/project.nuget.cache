@@ -1,17 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+LVN0d1OM7yjhHnLVD62Pbtkibeai4uVFvefW78JGuHEGA71F1esp/l//fSqHcPXciegePIMTd1Mh3K2Uq85IA==",
+  "dgSpecHash": "ryT/q9k17B9S+x1M1d9iVOl8XGyzs7gNjZMQbfseQxVs7KSOBGSX1SZ9lFGUbSpjLHgYC5MvO2G47jpsGfTsPA==",
   "success": true,
-  "projectFilePath": "D:\\OOTPiSP\\OOTPiSP\\Object Editor\\Object Editor.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\sharpziplib\\1.4.2\\sharpziplib.1.4.2.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\squid-box.sevenzipsharp\\1.6.1.23\\squid-box.sevenzipsharp.1.6.1.23.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0\\system.configuration.configurationmanager.4.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.security.accesscontrol\\4.5.0\\system.security.accesscontrol.4.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0\\system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\OOTPiSP\\Object Editor\\Object Editor.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

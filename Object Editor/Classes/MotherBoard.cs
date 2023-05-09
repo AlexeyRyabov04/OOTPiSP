@@ -2,7 +2,7 @@
 {
     [Name("Mother board")]
     [Class]
-    public class MotherBoard : ComputerPart
+    internal class MotherBoard : ComputerPart
     {
         private int numberOfMemorySlots;
         public enum Socket { 
@@ -27,13 +27,6 @@
             socket = motherBoard._Socket;
             format = motherBoard._Format;
         }
-        public MotherBoard(int _cost, int _guarantee, Vendor _vendor, Socket _socket, Format _format)
-            : base(_cost, _guarantee, _vendor)
-        {
-            socket = _socket;
-            format = _format;
-        }
-
         [Name("Memory Slots")]
         public int NumberOfMemorySlots { get { return numberOfMemorySlots; } set { numberOfMemorySlots = value;} }
         [Name("Socket")]

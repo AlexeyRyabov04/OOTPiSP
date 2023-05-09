@@ -1,6 +1,6 @@
 ﻿namespace Object_Editor.Classes
 {
-    public class Vendor
+    internal class Vendor
     {
         private string? name;
         private int yearOfFoundation;
@@ -12,12 +12,6 @@
             name = vendor.Name;
             yearOfFoundation = vendor.YearOfFoundation;
             yearIncome = vendor.YearIncome;
-        }
-        public Vendor(string _name, int _yearOfFoundation, int _yearIncome)
-        {
-            name = _name;
-            yearOfFoundation = _yearOfFoundation;
-            yearIncome = _yearIncome;
         }
         [Name("Name")]
         public string? Name { get { return name; } set { name = value; } }

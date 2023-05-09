@@ -1,8 +1,7 @@
 ﻿using System.Data;
 using System.Reflection;
 using Object_Editor.Classes;
-using Object_Editor.Factories.ClassesFactories;
-using Object_Editor.Factories.ControlsFactories;
+using Object_Editor.Factories;
 
 namespace Object_Editor
 {

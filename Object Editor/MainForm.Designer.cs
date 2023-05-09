@@ -43,14 +43,7 @@
             viewButton = new Button();
             editButton = new Button();
             deleteButton = new Button();
-            openFileDialog = new OpenFileDialog();
-            menuStrip = new MenuStrip();
-            fileToolStripMenuItem = new ToolStripMenuItem();
-            openToolStripMenuItem = new ToolStripMenuItem();
-            saveAsToolStripMenuItem = new ToolStripMenuItem();
-            saveFileDialog = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView
@@ -82,7 +75,7 @@
             dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridView.GridColor = SystemColors.Control;
-            dataGridView.Location = new Point(0, 88);
+            dataGridView.Location = new Point(3, 61);
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -140,7 +133,7 @@
             // 
             label.AutoSize = true;
             label.Font = new Font("Meiryo UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label.Location = new Point(327, 36);
+            label.Location = new Point(330, 9);
             label.Name = "label";
             label.Size = new Size(293, 30);
             label.TabIndex = 1;
@@ -151,7 +144,7 @@
             addButton.BackColor = Color.FromArgb(192, 192, 255);
             addButton.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             addButton.ForeColor = Color.White;
-            addButton.Location = new Point(0, 444);
+            addButton.Location = new Point(3, 417);
             addButton.Name = "addButton";
             addButton.Size = new Size(465, 51);
             addButton.TabIndex = 2;
@@ -165,7 +158,7 @@
             viewButton.Enabled = false;
             viewButton.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             viewButton.ForeColor = SystemColors.Control;
-            viewButton.Location = new Point(479, 444);
+            viewButton.Location = new Point(482, 417);
             viewButton.Name = "viewButton";
             viewButton.Size = new Size(465, 51);
             viewButton.TabIndex = 3;
@@ -179,7 +172,7 @@
             editButton.Enabled = false;
             editButton.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             editButton.ForeColor = SystemColors.Control;
-            editButton.Location = new Point(0, 513);
+            editButton.Location = new Point(3, 486);
             editButton.Name = "editButton";
             editButton.Size = new Size(465, 51);
             editButton.TabIndex = 4;
@@ -193,7 +186,7 @@
             deleteButton.Enabled = false;
             deleteButton.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             deleteButton.ForeColor = SystemColors.Control;
-            deleteButton.Location = new Point(479, 513);
+            deleteButton.Location = new Point(482, 486);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(465, 51);
             deleteButton.TabIndex = 5;
@@ -201,59 +194,24 @@
             deleteButton.UseVisualStyleBackColor = false;
             deleteButton.Click += deleteButton_Click;
             // 
-            // menuStrip
-            // 
-            menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
-            menuStrip.Location = new Point(0, 0);
-            menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(951, 24);
-            menuStrip.TabIndex = 6;
-            menuStrip.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveAsToolStripMenuItem });
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
-            fileToolStripMenuItem.Click += fileToolStripMenuItem_Click;
-            // 
-            // openToolStripMenuItem
-            // 
-            openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
-            openToolStripMenuItem.Text = "Open";
-            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(180, 22);
-            saveAsToolStripMenuItem.Text = "Save as";
-            saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(951, 572);
+            ClientSize = new Size(951, 549);
             Controls.Add(deleteButton);
             Controls.Add(editButton);
             Controls.Add(viewButton);
             Controls.Add(addButton);
             Controls.Add(label);
             Controls.Add(dataGridView);
-            Controls.Add(menuStrip);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Object Editor";
-            Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-            menuStrip.ResumeLayout(false);
-            menuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -271,11 +229,5 @@
         private DataGridViewTextBoxColumn PriceColumn;
         private DataGridViewTextBoxColumn GuarantyyColumn;
         private DataGridViewTextBoxColumn VendorColumn;
-        private OpenFileDialog openFileDialog;
-        private MenuStrip menuStrip;
-        private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripMenuItem saveAsToolStripMenuItem;
-        private SaveFileDialog saveFileDialog;
     }
 }

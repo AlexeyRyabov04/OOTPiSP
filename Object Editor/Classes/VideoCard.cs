@@ -2,7 +2,7 @@
 {
     [Name("Videocard")]
     [Class]
-    public class VideoCard : ComputerPart
+    internal class VideoCard : ComputerPart
     {
         private int numberOfMemorySlots;
         private int memoryFrequency;
@@ -16,15 +16,6 @@
             memoryFrequency = videoCard.MemoryFrequency;
             busWidth = videoCard.BusWidth;
             fillrate = videoCard.Fillrate;
-        }
-        public VideoCard(int _cost, int _guarantee, Vendor _vendor, int _numberOfMemorySlots, 
-            int _memoryFrequency, int _busWidth, int _fillrate)
-            : base(_cost, _guarantee, _vendor)
-        {
-            numberOfMemorySlots = _numberOfMemorySlots;
-            memoryFrequency = _memoryFrequency;
-            busWidth = _busWidth;
-            fillrate = _fillrate;
         }
         [Name("Memory slots")]
         public int NumberOfMemorySlots { get { return numberOfMemorySlots; } set { numberOfMemorySlots = value; } }
