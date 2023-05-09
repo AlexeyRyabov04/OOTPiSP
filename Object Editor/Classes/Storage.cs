@@ -1,6 +1,6 @@
 ﻿namespace Object_Editor.Classes
 {
-    internal abstract class Storage : ComputerPart
+    public abstract class Storage : ComputerPart
     {
         protected int storageCapacity;
         protected int RWSpeed;
@@ -10,6 +10,12 @@
         {
             storageCapacity = storage.StorageCapacity;
             RWSpeed = storage._RWSpeed;
+        }
+        public Storage(int _cost, int _guarantee, Vendor _vendor, int _storageCapacity, int _RWSpeed)
+            : base(_cost, _guarantee, _vendor)
+        {
+            storageCapacity = _storageCapacity;
+            RWSpeed = _RWSpeed;
         }
 
         [Name("Storage capacity")]

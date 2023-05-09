@@ -2,7 +2,7 @@
 {
     [Name("Keyboard")]
     [Class]
-    internal class Keyboard : PeripheralDevice
+    public class Keyboard : PeripheralDevice
     {
         private bool hasCyrillicSupport;
         private bool hasNumpad;
@@ -13,7 +13,14 @@
             hasCyrillicSupport = keyboard.HasCyrillicSupport;
             hasNumpad = keyboard.HasNumpad;
         }
-
+        public Keyboard(int _cost, int _guarantee, Vendor _vendor,
+            ConnectionInterface _connectionInterface, bool _isWireless, 
+            bool _hasCyrillicSupport, bool _hasNumpad)
+            : base(_cost, _guarantee, _vendor, _connectionInterface, _isWireless)
+        {
+            hasCyrillicSupport = _hasCyrillicSupport;
+            hasNumpad |= _hasNumpad;
+        }
         [Name("Cyrillic Support")]
         public bool HasCyrillicSupport { get { return hasCyrillicSupport; } set { hasCyrillicSupport = value; } }
         [Name("Numpad")]
